@@ -1,3 +1,6 @@
+/* FIRST SOLUTION */
+document.addEventListener("DOMContentLoaded", initApp);
+
 const initApp = () => {
   initCounter();
   increaseCounter();
@@ -58,4 +61,32 @@ const setCounterStyle = () => {
   }
 };
 
-document.addEventListener("DOMContentLoaded", initApp);
+/* SECOND SOLUTION */
+let count = 0;
+
+const value = document.querySelector("#counter");
+const buttons = document.querySelectorAll(".btn");
+
+buttons.forEach((btn) => {
+  btn.addEventListener("click", (event) => {
+    const classes = event.currentTarget.classList;
+    if (classes.contains("decrease")) {
+      count--;
+    } else if (classes.contains("increase")) {
+      count++;
+    } else {
+      count = 0;
+    }
+
+    if (count > 0) {
+      value.classList.add("above-zero");
+    } else if (count < 0) {
+      value.classList.add("below-zero");
+    } else {
+      value.classList.remove("below-zero");
+      value.classList.remove("above-zero");
+    }
+
+    value.textContent = count;
+  });
+});
